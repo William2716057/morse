@@ -13,6 +13,14 @@ $morseCode = @{
     '@' = '.--.-.'; '-' = '-....-'; '(' = '-.--.'; ')' = '-.--.-';
     ' ' = '/'
 }
+function ConvertToMorse {
+	param ([string]$message)
+	$morse = $message.ToUpper().ToCharArray() | ForEach-Object {$morseCode[$_] }
+	
+	#join symbols
+	return $morse -join ' '
+}
 
 #produce result
-Write-Host $morseCode['sos']
+Write-Host $morseCode[ConvertToMorse'sos']
+	
