@@ -14,4 +14,5 @@ $morseCode = @{
     ' ' = '/'
 }
 
-Write-Host $morseCode['S']
+#produce result
+Write-Host $morseCode['sos']
