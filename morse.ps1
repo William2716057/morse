@@ -1,10 +1,10 @@
 $morseCode = @{
-    'A' = '.-';    'B' = '-...';  'C' = '-.-.';  'D' = '-..';
-    'E' = '.';     'F' = '..-.';  'G' = '--.';   'H' = '....';
-    'I' = '..';    'J' = '.---';  'K' = '-.-';   'L' = '.-..';
-    'M' = '--';    'N' = '-.';    'O' = '---';   'P' = '.--.';
-    'Q' = '--.-';  'R' = '.-.';   'S' = '...';   'T' = '-';
-    'U' = '..-';   'V' = '...-';  'W' = '.--';   'X' = '-..-';
+    'A' = '.-';    'B' = '-...';    'C' = '-.-.';    'D' = '-..';
+    'E' = '.';     'F' = '..-.';    'G' = '--.';     'H' = '....';
+    'I' = '..';    'J' = '.---';    'K' = '-.-';     'L' = '.-..';
+    'M' = '--';    'N' = '-.';     'O' = '---';     'P' = '.--.';
+    'Q' = '--.-';  'R' = '.-.';     'S' = '...';     'T' = '-';
+    'U' = '..-';   'V' = '...-';    'W' = '.--';     'X' = '-..-';
     'Y' = '-.--';  'Z' = '--..';
     '0' = '-----'; '1' = '.----'; '2' = '..---'; '3' = '...--';
     '4' = '....-'; '5' = '.....'; '6' = '-....'; '7' = '--...';
@@ -19,16 +19,20 @@ Function ConvertToMorse {
         [string]$inputString
     )
 
-    ($inputString.ToUpper().ToCharArray() | ForEach-Object {
-        if ($morseCode.ContainsKey($_)) {
-            $morseCode[$_]
+    $morseArray = @() # Initialize an empty array
+    foreach ($char in $inputString.ToUpper()) {
+        if ($script:morseCode.ContainsKey($char)) {
+            $morseArray += $script:morseCode[$char]
         } else {
-            '?'
+            $morseArray += '?'
         }
-    }) -join ' '
+    }
+
+    return $morseArray -join ' '
 }
 
-# Example Usage
-$input = Read-Host "Enter a string to convert to Morse code"
+
+$input = Read-Host "Enter string"
 $converted = ConvertToMorse -inputString $input
 Write-Output "$converted"
+
