@@ -5,22 +5,30 @@ $morseCode = @{
     'M' = '--';    'N' = '-.';    'O' = '---';   'P' = '.--.';
     'Q' = '--.-';  'R' = '.-.';   'S' = '...';   'T' = '-';
     'U' = '..-';   'V' = '...-';  'W' = '.--';   'X' = '-..-';
-    'Y' = '-.--';  'Z' = '--..';  
+    'Y' = '-.--';  'Z' = '--..';
     '0' = '-----'; '1' = '.----'; '2' = '..---'; '3' = '...--';
     '4' = '....-'; '5' = '.....'; '6' = '-....'; '7' = '--...';
-    '8' = '---..'; '9' = '----.'; 
+    '8' = '---..'; '9' = '----.';
     '.' = '.-.-.-'; ',' = '--..--'; '?' = '..--..'; '/' = '-..-.';
     '@' = '.--.-.'; '-' = '-....-'; '(' = '-.--.'; ')' = '-.--.-';
     ' ' = '/'
 }
-function ConvertToMorse {
-	param ([string]$message)
-	$morse = $message.ToUpper().ToCharArray() | ForEach-Object {$morseCode[$_] }
-	
-	#join symbols
-	return $morse -join ' '
+
+Function ConvertToMorse {
+    param (
+        [string]$inputString
+    )
+
+    ($inputString.ToUpper().ToCharArray() | ForEach-Object {
+        if ($morseCode.ContainsKey($_)) {
+            $morseCode[$_]
+        } else {
+            '?'
+        }
+    }) -join ' '
 }
 
-#produce result
-Write-Host $morseCode[ConvertToMorse'sos']
-	
+# Example Usage
+$input = Read-Host "Enter a string to convert to Morse code"
+$converted = ConvertToMorse -inputString $input
+Write-Output "$converted"
