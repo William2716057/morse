@@ -1,4 +1,4 @@
-#dictionary of Morse code
+# Dictionary of Morse code
 $morseCode = @{
     'A' = '.-';    'B' = '-...';  'C' = '-.-.';  'D' = '-..';
     'E' = '.';     'F' = '..-.';  'G' = '--.';   'H' = '....';
@@ -15,17 +15,25 @@ $morseCode = @{
     ' ' = '/'
 }
 
-#take user input
-$message = Read-Host
+# Take user input
+$message = Read-Host "Enter text"
 
-#iterate through each character in $message
+# Initialize string array
+$stringArray = @()
+
+# Iterate through each character in $message
 foreach ($char in $message.ToCharArray()) {
-	#convert all to upper to ensure all characters are found in dictionary
-    $charUpper = [string]$char  # Cast $char to string, then convert to uppercase
+    # Convert all to upper to ensure all characters found in dictionary
+    $charUpper = [string]$char  # Cast $char to string
     $charUpper = $charUpper.ToUpper()  # Convert the string to uppercase
+    
     if ($morseCode.ContainsKey($charUpper)) {
-        Write-Host $morseCode[$charUpper]
+        # Append to an array
+        $stringArray += $morseCode[$charUpper]
     } else {
         Write-Host "'$char' not found in table."
     }
 }
+
+# Write as string in single line
+Write-Host ($stringArray -join ' ')
