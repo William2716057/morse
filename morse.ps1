@@ -2,7 +2,7 @@ $morseCode = @{
     'A' = '.-';    'B' = '-...';  'C' = '-.-.';  'D' = '-..';
     'E' = '.';     'F' = '..-.';  'G' = '--.';   'H' = '....';
     'I' = '..';    'J' = '.---';  'K' = '-.-';   'L' = '.-..';
-    'M' = '--';    'N' = '-.';    'O' = '---';   'P' = '.--.'; 
+    'M' = '--';    'N' = '-.';    'O' = '---';   'P' = '.--.';
     'Q' = '--.-';  'R' = '.-.';   'S' = '...';   'T' = '-';
     'U' = '..-';   'V' = '...-';  'W' = '.--';   'X' = '-..-';
     'Y' = '-.--';  'Z' = '--..';
@@ -14,12 +14,13 @@ $morseCode = @{
     ' ' = '/'
 }
 
-$message = 'SS'
+$message = 'Ss'
 
 foreach ($char in $message.ToCharArray()) {
-    if ($morseCode.ContainsKey($char) 
+    if ($morseCode.ContainsKey($char)) {
         Write-Host $morseCode[$char]
     } else {
         Write-Host "Character '$char' not found in Morse code table."
     }
 }
+
