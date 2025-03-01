@@ -17,10 +17,11 @@ $morseCode = @{
 $message = 'Ss'
 
 foreach ($char in $message.ToCharArray()) {
-    if ($morseCode.ContainsKey($char)) {
-        Write-Host $morseCode[$char]
+    $charUpper = [string]$char  # Cast $char to string, then convert to uppercase
+    $charUpper = $charUpper.ToUpper()  # Convert the string to uppercase
+    if ($morseCode.ContainsKey($charUpper)) {
+        Write-Host $morseCode[$charUpper]
     } else {
         Write-Host "Character '$char' not found in Morse code table."
     }
 }
-
