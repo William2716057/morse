@@ -14,4 +14,7 @@ $morseCode = @{
     ' ' = '/'
 }
 
-Write-Host $morseCode['S']
+$message = Write-Host $morseCode['ss']
+foreach ($char in $string.ToCharArray()) {
+    Write-Host $message
+}
