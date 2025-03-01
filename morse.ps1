@@ -14,7 +14,8 @@ $morseCode = @{
     ' ' = '/'
 }
 
-$message = 'Ss'
+#$message = 'Ss'
+$message = Read-Host
 
 foreach ($char in $message.ToCharArray()) {
     $charUpper = [string]$char  # Cast $char to string, then convert to uppercase
